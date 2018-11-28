@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SegundoParcial
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] areglo;
+            String[] ordenado;
+            String[] leer;
+            int cont;
+            using (var fileStream = File.Create("C:\\Users\\navi2\\Documents\\archivo de programcion 3 archivo.txt"))
+            {
+                var texto = new UTF8Encoding(true).GetBytes("Aqui va el texto que desean volvar al fichero");
+                fileStream.Write(texto, 0, texto.Length);
+                fileStream.Flush();
+
+                Console.WriteLine("indique cantidad de unmeros que va a ingresar");
+                cont = Console.Read();
+                
+                areglo = new int[cont];
+                ordenado = new string[cont];
+
+                
+                for (int o = 0;o<areglo.Length - 1;o++)
+                {
+                    Console.Write("ingrese los numeros ");
+                    areglo[o] = (int)Console.Read();
+                    o++;
+
+                }
+
+                for (int j = 0; j <= areglo.Length - 2; j++)
+                {
+                    for (int i = 0; i <= areglo.Length - 2; i++)
+                    {
+                        if (areglo[i] > areglo[i + 1])
+                        {
+                            int temp = areglo[i + 1];
+                            areglo[i + 1] = areglo[i];
+                            areglo[i] = temp;
+                        }
+                    }
+                }
+                for(int g = 0; g < cont; g++)
+                {
+                    Console.Write(areglo[g]);
+                }
+                for(int r = 0; r < cont; r++)
+                {
+                    ordenado[r]= areglo[r].ToString();
+                }
+                File.WriteAllText(archivo, ordenado);
+                File.ReadAllText(archivo, leer);
+
+
+            }
+        }
+    }
+}
